@@ -1,11 +1,11 @@
 import React from "react";
 
-function FormInput() {
+function FormInput({ addWord }) {
   const [word, setWord] = React.useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(word);
+    addWord(word);
     setWord("");
   };
   return (
