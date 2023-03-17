@@ -1,13 +1,16 @@
 import React from "react";
+import { checkGuess } from "../../game-helpers";
 
-function FormInput({ addWord }) {
-  const [word, setWord] = React.useState("");
+function FormInput({ handleGuess, answer }) {
+  const [guess, setGuess] = React.useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addWord(word);
-    setWord("");
+    const guessResult = checkGuess(guess, answer);
+    handleGuess(guessResult);
+    setGuess("");
   };
+
   return (
     <form className="guess-input-wrapper" onSubmit={handleSubmit}>
       <label htmlFor="guess-input">Enter guess:</label>
@@ -18,8 +21,8 @@ function FormInput({ addWord }) {
         maxLength={5}
         pattern=".{2,5}"
         required
-        value={word}
-        onChange={(e) => setWord(e.target.value.toUpperCase())}
+        value={guess}
+        onChange={(e) => setGuess(e.target.value.toUpperCase())}
       />
     </form>
   );
