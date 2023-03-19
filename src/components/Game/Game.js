@@ -29,7 +29,11 @@ function Game() {
           <Guess key={index} guess={guesses[index]} answer={answer} />
         ))}
       </div>
-      <FormInput handleGuess={handleGuess} answer={answer} />
+      <FormInput
+        handleGuess={handleGuess}
+        answer={answer}
+        guessesLength={guesses.length}
+      />
     </>
   );
 }
