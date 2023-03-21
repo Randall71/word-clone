@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React from "react";
 import { NUM_OF_LETTERS_ALLOWED } from "../../constants";
-import { checkGuess } from "../../game-helpers";
 import { range } from "../../utils";
 
 function Cell({ letter, status }) {
@@ -10,15 +9,13 @@ function Cell({ letter, status }) {
 }
 
 function Guess({ guess, answer }) {
-  const guessResult = checkGuess(guess, answer);
-
   return (
     <p className="guess">
       {range(NUM_OF_LETTERS_ALLOWED).map((index) => (
         <Cell
           key={index}
-          letter={guessResult ? guessResult[index].letter : ""}
-          status={guessResult ? guessResult[index].status : ""}
+          letter={guess ? guess[index].letter : ""}
+          status={guess ? guess[index].status : ""}
         />
       ))}
     </p>
