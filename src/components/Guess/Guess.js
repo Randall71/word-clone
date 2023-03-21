@@ -16,6 +16,7 @@ function Guess({ guess, answer }) {
     <p className="guess">
       {range(NUM_OF_LETTERS_ALLOWED).map((index) => (
         <Cell
+          key={index}
           letter={guessResult ? guessResult[index].letter : ""}
           status={guessResult ? guessResult[index].status : ""}
         />

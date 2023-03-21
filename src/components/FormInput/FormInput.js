@@ -1,24 +1,17 @@
 import React from "react";
-import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
-function FormInput({ handleGuess, answer, guessesLength }) {
+function FormInput({ handleGuess, gameStatus }) {
   const [tentativeGuess, setTentativeGuess] = React.useState("");
-  const [inputStateDisabled, setInputStateDisabled] = React.useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleGuess(tentativeGuess);
     setTentativeGuess("");
-
-    if (guessesLength + 1 > NUM_OF_GUESSES_ALLOWED - 1) {
-      setInputStateDisabled(true);
-    } else {
-      setInputStateDisabled(tentativeGuess === answer);
-    }
   };
 
   return (
     <>
+      {gameStatus}
       <form className="guess-input-wrapper" onSubmit={handleSubmit}>
         <label htmlFor="guess-input">Enter guess:</label>
         <input
@@ -30,23 +23,8 @@ function FormInput({ handleGuess, answer, guessesLength }) {
           required
           value={tentativeGuess}
           onChange={(e) => setTentativeGuess(e.target.value.toUpperCase())}
-          disabled={inputStateDisabled}
+          disabled={gameStatus !== "running"}
         />
-        {inputStateDisabled && (
-          <div className="banner happy">
-            <p>
-              <strong>Congratulations!</strong> Got it in
-              <strong> {guessesLength} guesses</strong>.
-            </p>
-          </div>
-        )}
-        {guessesLength >= NUM_OF_GUESSES_ALLOWED && (
-          <div className="banner sad">
-            <p>
-              Sorry, the correct answer is <strong>{answer}</strong>
-            </p>
-          </div>
-        )}
       </form>
     </>
   );
