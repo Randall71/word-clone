@@ -3,19 +3,19 @@ import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 import { checkGuess } from "../../game-helpers";
 
 function FormInput({ handleGuess, answer, guessesLength }) {
-  const [guess, setGuess] = React.useState("");
+  const [tentativeGuess, setTentativeGuess] = React.useState("");
   const [inputStateDisabled, setInputStateDisabled] = React.useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const guessResult = checkGuess(guess, answer);
+    const guessResult = checkGuess(tentativeGuess, answer);
     handleGuess(guessResult);
-    setGuess("");
+    setTentativeGuess("");
 
     if (guessesLength + 1 > NUM_OF_GUESSES_ALLOWED - 1) {
       setInputStateDisabled(true);
     } else {
-      setInputStateDisabled(guess === answer);
+      setInputStateDisabled(tentativeGuess === answer);
     }
   };
 
@@ -26,16 +26,16 @@ function FormInput({ handleGuess, answer, guessesLength }) {
         <input
           id="guess-input"
           type="text"
-          minLength={2}
+          minLength={5}
           maxLength={5}
-          pattern=".{2,5}"
+          pattern=".{5}"
           required
-          value={guess}
-          onChange={(e) => setGuess(e.target.value.toUpperCase())}
+          value={tentativeGuess}
+          onChange={(e) => setTentativeGuess(e.target.value.toUpperCase())}
           disabled={inputStateDisabled}
         />
         {inputStateDisabled && (
-          <div className="banner">
+          <div className="banner happy">
             <p>
               <strong>Congratulations!</strong> Got it in
               <strong> {guessesLength} guesses</strong>.
