@@ -1,6 +1,5 @@
 import React from "react";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
-import { checkGuess } from "../../game-helpers";
 
 function FormInput({ handleGuess, answer, guessesLength }) {
   const [tentativeGuess, setTentativeGuess] = React.useState("");
@@ -8,8 +7,7 @@ function FormInput({ handleGuess, answer, guessesLength }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const guessResult = checkGuess(tentativeGuess, answer);
-    handleGuess(guessResult);
+    handleGuess(tentativeGuess);
     setTentativeGuess("");
 
     if (guessesLength + 1 > NUM_OF_GUESSES_ALLOWED - 1) {
