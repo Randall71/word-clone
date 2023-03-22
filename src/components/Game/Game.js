@@ -45,12 +45,7 @@ function Game() {
           <Guess key={index} guess={validatedGuesses[index]} answer={answer} />
         ))}
       </div>
-      <FormInput
-        handleGuess={handleGuess}
-        answer={answer}
-        guessesLength={guesses.length}
-        gameStatus={gameStatus}
-      />
+      <FormInput handleGuess={handleGuess} gameStatus={gameStatus} />
       <Keyboard validatedGuesses={validatedGuesses} />
       {gameStatus === "won" && (
         <WonBanner
